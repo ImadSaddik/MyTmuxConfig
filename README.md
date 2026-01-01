@@ -1,31 +1,66 @@
 # My tmux configuration
 
-This repository contains my personal tmux configuration file. It makes using tmux much more fun. This configuration does the following:
+This is my personal tmux configuration file. It makes tmux much more fun and easier to use than the default setup.
 
-- Remaps the prefix key to `Ctrl+a` because it's easier to reach.
-- Enables mouse support so that you can click to select panes and windows, resize panes, and scroll.
-- You can reload the tmux configuration by pressing `Ctrl+a` then `r`.
-- It changes the split commands to use `|` for vertical splits and `-` for horizontal splits. That is more intuitive than the default commands (`%` and `"`).
-- You can use arrows to switch between panes easily. Hold `Alt` and press the arrow keys to move between panes.
-- It starts the counter at 1 for windows and panes because reaching 0 is not as easy as reaching 1.
-- It prevents renaming windows automatically, so your window names stay consistent.
-- The status style and pane borders are customized.
-- You can resize the panes using `Ctrl+a` then `Arrow keys`. You can tap the arrow key multiple times immediately after pressing the prefix to resize faster.
-- For wayland users, the configuration copies the selected text to the clipboard using [wl-clipboard](https://github.com/bugaevc/wl-clipboard) when you select text with the mouse.
+I built this configuration to fix a few things I found annoying in the standard tmux. For example, it changes the prefix to `Ctrl+a` (because it is closer to your fingers) and enables mouse support so you can just click things if you want to.
 
->[!NOTE]
->`wl-clipboard` is for wayland users only. If you are using X11, download and use [xclip](https://github.com/astrand/xclip) instead. You will need to modify the configuration file accordingly.
+## What this config does
 
-## Usage
+* **Better prefix:** I remapped the prefix to `Ctrl+a`. It is much easier to reach than `Ctrl+b`.
+* **Mouse support:** You can click to select panes, resize windows, and scroll just like a normal terminal.
+* **Intuitive splits:** I use `|` for vertical splits and `-` for horizontal splits. This makes way more sense than the default `%` and `"`.
+* **Easy navigation:** You can hold `Alt` and use the arrow keys to jump between panes.
+* **Sane counting:** Windows and panes start at 1 because reaching for the 0 key is too far.
+* **Clipboard:** It automatically detects if you are using Wayland or X11 and sets up the clipboard copy correctly.
 
-Copy `tmux.conf` to your home directory as `.tmux.conf`:
+## Keybindings cheat sheet
 
-```bash
-cp tmux.conf ~/.tmux.conf
-```
+Here is a quick list of the shortcuts I use most often:
 
-Reload your tmux configuration or restart tmux:
+| Keys | What it does |
+| :--- | :--- |
+| `Ctrl+a` | The new Prefix key |
+| `Ctrl+a` then `r` | Reloads the config file instantly |
+| `Ctrl+a` then <code>&#124;</code> | Splits the window vertically |
+| `Ctrl+a` then `-` | Splits the window horizontally |
+| `Alt` + `Arrows` | Switches between panes (no prefix needed) |
+| `Ctrl+a` + `Arrows` | Resizes the pane (you can tap the arrow multiple times) |
 
-```bash
-tmux source-file ~/.tmux.conf
-```
+## Quick install
+
+The easiest way to install this is to use the included script. It will back up your old config and set up the clipboard for you automatically.
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:ImadSaddik/MyTmuxConfig.git
+   cd MyTmuxConfig
+    ```
+
+2. Run the installer:
+
+    ```bash
+    chmod +x install.sh
+    ./install.sh
+    ```
+
+## Manual install
+
+If you prefer to do it manually, follow these steps:
+
+1. Copy the config file:
+
+    ```bash
+    cp tmux.conf ~/.tmux.conf
+    ```
+
+2. Reload tmux:
+
+    ```bash
+    tmux source-file ~/.tmux.conf
+    ```
+
+3. **Check your clipboard:**
+
+* If you use **Wayland**, install [wl-clipboard](https://github.com/bugaevc/wl-clipboard).
+* If you use **X11**, install [xclip](https://github.com/astrand/xclip) and edit your `~/.tmux.conf`. Change the last line to replace `wl-copy` with `xclip -selection clipboard -i`.
